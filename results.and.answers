@@ -1,0 +1,111 @@
+[17:13:57]rkdhatt[~]:curl http://127.0.0.1:5000/api/todos
+{
+    "todo1": {
+        "task": "build an API"
+    }, 
+    "todo2": {
+        "task": "?????"
+    }, 
+    "todo3": {
+        "task": "profit!"
+    }
+}
+
+
+[17:14:00]rkdhatt[~]:curl http://127.0.0.1:5000/api/todos/todo3
+{
+    "task": "profit!"
+}
+
+[17:14:59]rkdhatt[~]:curl http://127.0.0.1:5000/api/todos/todo2 -X DELETE -v
+* Hostname was NOT found in DNS cache
+*   Trying 127.0.0.1...
+* Connected to 127.0.0.1 (127.0.0.1) port 5000 (#0)
+> DELETE /api/todos/todo2 HTTP/1.1
+> User-Agent: curl/7.35.0
+> Host: 127.0.0.1:5000
+> Accept: */*
+> 
+* HTTP 1.0, assume close after body
+< HTTP/1.0 204 NO CONTENT
+< Content-Type: application/json
+< Content-Length: 0
+< Server: Werkzeug/0.11.4 Python/2.7.6
+< Date: Thu, 25 Feb 2016 00:15:25 GMT
+< 
+* Closing connection 0
+
+[17:15:25]rkdhatt[~]:curl http://127.0.0.1:5000/api/todos -d "task=something new" -X POST -v
+* Hostname was NOT found in DNS cache
+*   Trying 127.0.0.1...
+* Connected to 127.0.0.1 (127.0.0.1) port 5000 (#0)
+> POST /api/todos HTTP/1.1
+> User-Agent: curl/7.35.0
+> Host: 127.0.0.1:5000
+> Accept: */*
+> Content-Length: 18
+> Content-Type: application/x-www-form-urlencoded
+> 
+* upload completely sent off: 18 out of 18 bytes
+* HTTP 1.0, assume close after body
+< HTTP/1.0 201 CREATED
+< Content-Type: application/json
+< Content-Length: 32
+< Server: Werkzeug/0.11.4 Python/2.7.6
+< Date: Thu, 25 Feb 2016 00:16:52 GMT
+< 
+{
+    "task": "something new"
+}
+* Closing connection 0
+
+[17:16:52]rkdhatt[~]:curl http://127.0.0.1:5000/api/todos/todo3 -d "task=something different" -X PUT -v
+* Hostname was NOT found in DNS cache
+*   Trying 127.0.0.1...
+* Connected to 127.0.0.1 (127.0.0.1) port 5000 (#0)
+> PUT /api/todos/todo3 HTTP/1.1
+> User-Agent: curl/7.35.0
+> Host: 127.0.0.1:5000
+> Accept: */*
+> Content-Length: 24
+> Content-Type: application/x-www-form-urlencoded
+> 
+* upload completely sent off: 24 out of 24 bytes
+* HTTP 1.0, assume close after body
+< HTTP/1.0 201 CREATED
+< Content-Type: application/json
+< Content-Length: 38
+< Server: Werkzeug/0.11.4 Python/2.7.6
+< Date: Thu, 25 Feb 2016 00:17:44 GMT
+< 
+{
+    "task": "something different"
+}
+* Closing connection 0
+
+
+1) What does REST stand for? What does it mean?
+Representational state transfer. A software architectural style fro the world wide web. It uses HTTP protocol to make calls between machines (wikipedia).
+
+2) What does CRUD stand for?
+Create, Read, Update, Delete
+
+3) HTTP 1XX: Informational code - requests received, continue processing
+HTTP 2XX: Success code - action requested by client was received and processed successfully.
+HTTP 3XX: Redirection - need to do more stuff to complete request
+HTTP: 4XX: Client error: client made a mistake (Ex: trying to access forbidden stuff, file not found, etc)
+HTTP 5XX: Server error: Server could not complete request due to some type of internal error (ex: bad gateway, timeout, etc)
+https://en.wikipedia.org/wiki/List_of_HTTP_status_codes
+
+4) What are the benefits of using yeoman generators to scaffold our application? Cons?
+Benefit: Allows you to work with package manager directly so that the whole project can be managed with it; allows you to choose between different build systems (Grunt, Gulp). Cons: Can cause issues when combining with backend frameworks (ex: django)
+http://www.slant.co/topics/1485/viewpoints/1/~workflow-wrappers-for-front-end-development~yeoman
+
+5) What is a XSS attack? What does CORS stand for and what does it mean?
+Cross-Site Scripting - malicious scripts injected into websites (https://www.owasp.org/index.php/Cross-site_Scripting_%28XSS%29)
+Cross-origin resource sharing: allows cross-communication from the browser. This can allow info from one site to be accessible to another by using special response headers.(http://www.html5rocks.com/en/tutorials/cors/)
+
+6) Why should client side javascript and css be minified before deployment?
+It allows optimization which is not done by zipping - removes unnecessary code without changing functionality. (http://stackoverflow.com/questions/16196358/why-do-people-minify-css-and-javascript-when-we-have-gzip)
+
+
